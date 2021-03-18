@@ -1,0 +1,23 @@
+/* .edit-icon{
+    background-color: rgb(0, 185, 0);
+    color: white;
+    font-size: 18px;
+    padding: 5px 7px 5px 7px;
+    transition: 0.5s;
+    border-radius: 3px;
+}
+.del-icon{
+    background-color: rgb(219, 0, 0);
+    color: white;
+    font-size: 18px;
+    padding: 5px 9.25px 5px 9.25px;
+    margin-left: 10px;
+    transition: 0.5s;
+    border-radius: 3px;
+}
+.edit-icon:hover,.del-icon:hover{
+    color: black;
+}
+.btn-success:hover{
+    color: black;
+} */

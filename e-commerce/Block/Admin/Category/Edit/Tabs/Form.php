@@ -6,33 +6,12 @@ namespace Block\Admin\Category\Edit\Tabs;
 
 Class Form extends \Block\Admin\Category\Edit
 {
-    //protected $category = null;
     protected $categories = null;
     protected $categoryOptions = [];
     
     public function __construct() {
         $this->setTemplate('View/admin/category/edit/tabs/form.php');
     }
-
-   /*  public function setCategory($category = null){
-        if ($category) {
-            $this->$category = $category;
-            return $this;
-        }
-        $category = \Mage::getModel('Model\Category');
-        if($id = $this->getRequest()->getGet('categoryId')){
-            $category = $category->load($id);
-        }
-        $this->category = $category;
-        return $this;
-    }
-
-    public function getCategory(){
-        if (!$this->category) {
-            $this->setCategory();
-        }
-        return $this->category;
-    } */
 
     public function setParentOptions()
     {   

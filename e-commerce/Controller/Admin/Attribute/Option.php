@@ -20,7 +20,7 @@ class Option extends \Controller\Core\Admin{
 
             $attribute = \Mage::getModel('Model\Attribute');
             $attribute->load($attributeId);
-            if(!$attribute->getData()){
+            if(!$attribute->getOriginalData()){
                 throw new \Exception("No Product Found.");
             }
 

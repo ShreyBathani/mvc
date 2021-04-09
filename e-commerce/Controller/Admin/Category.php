@@ -28,19 +28,18 @@ class Category extends \Controller\Core\Admin
             $category = \Mage::getModel('Model\Category');
             $category->load($categoryId);
             if ($categoryId) {
-                if(!$category->getData()){
+                if(!$category->getOriginalData()){
                     throw new \Exception("No Record Found.");
                 }
             }
 
-            $editBlock = \Mage::getBlock('Block\Admin\Category\Edit')->setTableRow($category)->toHtml();
-
+            
             /* $layout = $this->getLayout();
             $layout->setTemplate('View/admin/core/layout/twoColumn.php');
             
             $content = $layout->getContent();
             $content->addChild($editBlock);
-
+            
             $left = $layout->getLeft();
             $left->addChild($blockTab);
             
@@ -49,6 +48,7 @@ class Category extends \Controller\Core\Admin
         catch (\Exception $e) {
             $this->getMessage()->setFailure($e->getMessage());
         }
+        $editBlock = \Mage::getBlock('Block\Admin\Category\Edit')->setTableRow($category)->toHtml();
         $this->makeResponse($editBlock);
     }
     
@@ -63,7 +63,7 @@ class Category extends \Controller\Core\Admin
             $category = \Mage::getModel('Model\Category');
             $category->load($categoryId);
             if ($categoryId) {
-                if(!$category->getData()){
+                if(!$category->getOriginalData()){
                     throw new \Exception("No Record Found.");
                 }
             }
@@ -84,7 +84,6 @@ class Category extends \Controller\Core\Admin
         catch (\Exception $e) {
             $this->getMessage()->setFailure($e->getMessage());
         }
-
         $gridBlock = \Mage::getBlock('Block\Admin\Category\Grid')->toHtml();
         $this->makeResponse($gridBlock);
         
@@ -100,7 +99,7 @@ class Category extends \Controller\Core\Admin
             
             $category = \Mage::getModel('Model\Category');
             $category->load($categoryId);
-            if(!$category->getData()){
+            if(!$category->getOriginalData()){
                 throw new \Exception("No record Found.");
             }
 

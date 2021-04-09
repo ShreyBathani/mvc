@@ -30,12 +30,6 @@
                 <input type="text" name="shippingMethod[amount]" id="amount" class="form-control" value="<?php echo $shippingMethodRow->amount; ?>">
             </div>
             <div class="col-4">
-                <label for="description">Description: </label>
-                <input type="text" name="shippingMethod[description]" class="form-control" id="description" value="<?php echo $shippingMethodRow->description; ?>">
-            </div>
-        </div>
-        <div class="row form-group">
-            <div class="col-4">
                 <label for="status">Status: </label>
                 <select name="shippingMethod[status]" class="form-control">
                 <option value='' disabled selected></option>
@@ -45,6 +39,12 @@
                 <?php endforeach; ?>
                 
                 </select>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-4">
+                <label for="description">Description: </label>
+                <textarea name="shippingMethod[description]" class="form-control" id="description" rows="4"><?php echo $shippingMethodRow->description; ?></textarea>
             </div>
         </div>
         <div class="row form-group">

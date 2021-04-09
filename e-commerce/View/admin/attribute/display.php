@@ -1,11 +1,12 @@
-<?php $attribute = $this->getAttribute();  ?>
+<?php $attribute = $this->getAttribute(); ?>
 <?php $product = $this->getProduct(); ?>
 <?php $options = $this->getOptions(); ?>
-<pre>
-<?php //print_r($attribute); ?>
-<?php //print_r($product); ?>
-<?php //print_r($options); ?>
-</pre>
+
+<!-- <pre>
+    <?php //print_r($attribute); ?>
+    <?php //print_r($product); ?>
+    <?php //print_r($options); ?>
+</pre> -->
 
 <?php if (!$options && $attribute->inputType != 'text'): ?>
     <label for="<?php echo $attribute->name; ?>"> <?php echo $attribute->name; ?>: </label>
@@ -45,10 +46,10 @@
         <?php case 'radio': ?>
             <div class="row form-group">
                 <div class="col-4">
-                    <label for="<?php echo $attribute->name; ?>"> <?php echo $attribute->name; $attriName = $attribute->code;?>: </label><hr>
+                    <label for="<?php echo $attribute->name; ?>"> <?php echo $attribute->name; $attriName = $attribute->code;?>: </label>
                     
                     <?php foreach ($options->getData() as $option): ?>
-                        <?php echo $option->name; ?><input type="radio" name="product[<?php echo $attribute->name; ?>]" value="<?php echo $attribute->name; ?>" class="form-check-control" <?php if($option->optionId == $product->$attriName){ echo "checked"; } ?>>
+                        <?php echo $option->name; ?><input type="radio" name="product[<?php echo $attribute->name; ?>]" value="<?php echo $option->optionId; ?>" class="form-check-control" <?php if($option->optionId == $product->$attriName){ echo "checked"; } ?>>
                     <?php endforeach; ?>
 
                     </select>
@@ -80,7 +81,7 @@
     <?php endswitch; ?>
 <?php endif; ?>
 
-
+<hr>
 <!-- <div class="row form-group">
     <div class="col-6">
     </div>

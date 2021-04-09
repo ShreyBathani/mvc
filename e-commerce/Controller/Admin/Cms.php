@@ -23,17 +23,15 @@ class Cms extends \Controller\Core\Admin{
             $cms = \Mage::getModel('Model\Cms');
             $cms->load($pageId);
             if($pageId){
-                if (!$cms->getData()) {
+                if (!$cms->getOriginalData()) {
                     throw new \Exception("No record found.");
                 }
             }
-
-            $editBlock = \Mage::getBlock('Block\Admin\Cms\Edit')->setTableRow($cms)->toHtml();
-
         }
         catch (\Exception $e) {
             $this->getMessage()->setFailure($e->getMessage());
         }
+        $editBlock = \Mage::getBlock('Block\Admin\Cms\Edit')->setTableRow($cms)->toHtml();
         $this->makeResponse($editBlock);
     }
 
@@ -50,7 +48,7 @@ class Cms extends \Controller\Core\Admin{
             $cms = \Mage::getModel('Model\Cms');
             $cms->load($pageId);
             if($pageId){
-                if (!$cms->getData()) {
+                if (!$cms->getOriginalData()) {
                     throw new \Exception("No record found.");
                 }
             }
@@ -81,7 +79,7 @@ class Cms extends \Controller\Core\Admin{
             
             $cms = \Mage::getModel('Model\Cms');
             $cms->load($pageId);
-            if (!$cms->getData()) {
+            if (!$cms->getOriginalData()) {
                 throw new \Exception("No record found.");
             }
             if(!$cms->delete()){

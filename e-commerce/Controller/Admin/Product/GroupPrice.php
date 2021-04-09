@@ -13,16 +13,16 @@ class GroupPrice extends \Controller\Core\Admin
             $product = \Mage::getModel('Model\Product');
             $product->load($productId);
             if ($productId) {
-                if(!$product->getData()){
+                if(!$product->getOriginalData()){
                     throw new \Exception("Record Not Found.");
                 }
             }
             
-            $formBlock = \Mage::getBlock('Block\Admin\Product\Edit')->setTableRow($product)->toHtml();
         }
         catch (\Exception $e) {
             $this->getMessage()->setFailure($e->getMessage());
         }
+        $formBlock = \Mage::getBlock('Block\Admin\Product\Edit')->setTableRow($product)->toHtml();
         $this->makeResponse($formBlock);
     }
     
@@ -41,7 +41,7 @@ class GroupPrice extends \Controller\Core\Admin
             
             $product = \Mage::getModel('Model\Product');
             $product->load($productId);
-            if(!$product->getData()){
+            if(!$product->getOriginalData()){
                 throw new \Exception("No Product Found.");
             }
             

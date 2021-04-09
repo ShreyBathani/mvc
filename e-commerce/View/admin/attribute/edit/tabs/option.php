@@ -5,7 +5,6 @@
         Attribute option
     </h2>
 </div>
-
 <hr>
 
 <form method="POST" action="<?php echo "{$this->geturl('save', 'Admin\Attribute\Option', null)}"; ?>">
@@ -40,11 +39,11 @@
 <div style="display: none;">
     <table id="newOption">
         <tbody>
-                <tr>
-                    <td><input type="text" name="new[name][]" class="form-control col-9"></td>
-                    <td><input type="text" name="new[sortOrder][]" class="form-control col-9"></td>
-                    <td><button type="button" class="btn btn-danger float-right" onclick="object.removeRow(this)" id="remove">Remove</button></td>
-                </tr>
+            <tr>
+                <td><input type="text" name="new[name][]" class="form-control col-9"></td>
+                <td><input type="text" name="new[sortOrder][]" class="form-control col-9"></td>
+                <td><button type="button" class="btn btn-danger float-right" onclick="object.removeRow(this)" id="remove">Remove</button></td>
+            </tr>
         </tbody>
     </table>
 </div>

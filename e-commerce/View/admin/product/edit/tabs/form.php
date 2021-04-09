@@ -1,4 +1,6 @@
 <?php $productRow = $this->getTableRow(); ?>
+<?php $categoryOptions = $this->getCategoryOptions(); ?>
+<?php $selectedCategory = $this->getSelectedCategory(); ?>
 
 <div id="title">
     <h2>
@@ -11,6 +13,7 @@
     </h2>
 </div>
 <hr>
+
 <form method="POST" action="<?php echo "{$this->geturl('save', 'Admin\product', null)}"; ?>" enctype="multipart/form-data">
     <div  class="ml-5">
         <div class="row form-group">
@@ -39,18 +42,28 @@
                 <input type="number" name="product[quantity]" class="form-control" id="quantity" value="<?php echo $productRow->quantity; ?>">
             </div>
             <div class="col-4">
-                <label for="description">Description: </label>
-                <input type="text" name="product[description]" class="form-control" id="description" value="<?php echo $productRow->description; ?>">
-            </div>
-        </div>
-        <div class="row form-group">
-            <div class="col-4">
                 <label for="status">Status: </label>
                 <select name="product[status]" class="form-control">
                 <option value='' disabled selected></option>
                 
                 <?php foreach ($this->getTableRow()->getStatusOptions() as $key => $value): ?>
                     <option value="<?php echo $key ?>" <?php if($productRow->status == $key){ if($productRow->productId){echo "selected";} } ?> ><?php echo $value; ?></option>  
+                <?php endforeach; ?>
+
+                </select>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-4">
+                <label for="description">Description: </label>
+                <textarea name="product[description]" class="form-control" id="description" rows="4"><?php echo $productRow->description; ?></textarea>
+            </div>
+            <div class="col-4">
+                <label for="category">Category: </label>
+                <select name="product[category][]" class="form-control" multiple>
+                
+                <?php foreach ($categoryOptions as $id => $category): ?>
+                    <option value="<?php echo $id ?>" <?php if(in_array($id, $selectedCategory)) { echo "selected"; } ?> ><?php echo $category; ?></option>  
                 <?php endforeach; ?>
 
                 </select>

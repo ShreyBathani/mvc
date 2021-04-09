@@ -23,17 +23,17 @@ class PaymentMethod extends \Controller\Core\Admin{
             $paymentMethod = \Mage::getModel('Model\PaymentMethod');
             $paymentMethod->load($methodId);
             if($methodId){
-                if (!$paymentMethod->getData()) {
+                if (!$paymentMethod->getOriginalData()) {
                     throw new \Exception("No record found.");
                 }
             }
 
-            $editBlock = \Mage::getBlock('Block\Admin\PaymentMethod\Edit')->setTableRow($paymentMethod)->toHtml();
             //$tabBlock = \Mage::getBlock('Block\Admin\PaymentMethod\Edit\Tabs')->toHtml();
         }
         catch (\Exception $e) {
             $this->getMessage()->setFailure($e->getMessage());
         }
+        $editBlock = \Mage::getBlock('Block\Admin\PaymentMethod\Edit')->setTableRow($paymentMethod)->toHtml();
         $this->makeResponse($editBlock);
     }
 
@@ -49,7 +49,7 @@ class PaymentMethod extends \Controller\Core\Admin{
             $paymentMethod = \Mage::getModel('Model\PaymentMethod');
             $paymentMethod->load($methodId);
             if($methodId){
-                if (!$paymentMethod->getData()) {
+                if (!$paymentMethod->getOriginalData()) {
                     throw new \Exception("No record found.");
                 }
             }
@@ -80,7 +80,7 @@ class PaymentMethod extends \Controller\Core\Admin{
 
             $paymentMethod = \Mage::getModel('Model\PaymentMethod');
             $paymentMethod->load($methodId);
-            if(!$paymentMethod->getData()){
+            if(!$paymentMethod->getOriginalData()){
                 throw new \Exception("No record Found.");
             }
             if(!$paymentMethod->delete()){

@@ -1,5 +1,10 @@
 <?php $cms = $this->getCms(); ?>
 
+<h4>
+Manage Cms
+</h4>
+<hr>
+
 <a class="btn btn-success" onclick="object.setUrl('<?php echo $this->geturl('form', null, null, true); ?>').load();" href="javascript:void(0);">Add Page</a><br><br>
 <div id="table">
 	<table class="table table-hover">

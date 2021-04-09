@@ -30,28 +30,6 @@ Class Attribute extends \Block\Admin\Product\Edit
         }
         return $this->attributes;
     }
-
-    /* public function setProduct($product = null)
-    {
-        if ($product) {
-            $this->$product = $product;
-            return $this;
-        }
-        $product = \Mage::getModel('Model\Product');
-        if($id = $this->getRequest()->getGet('productId')){
-            $product = $product->load($id);
-        }
-        $this->product = $product;
-        return $this;
-    }
-
-    public function getProduct()
-    {
-        if (!$this->product) {
-            $this->setProduct();
-        }
-        return $this->product;
-    } */
 }
 
 ?>

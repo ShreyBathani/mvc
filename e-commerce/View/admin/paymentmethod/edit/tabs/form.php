@@ -27,7 +27,7 @@
         <div class="row form-group">
             <div class="col-4">
                 <label for="description">Description: </label>
-                <input type="text" name="paymentMethod[description]" class="form-control" id="description" value="<?php echo $paymentMethodRow->description; ?>">
+                <textarea name="paymentMethod[description]" class="form-control" id="description" rows="4"><?php echo $paymentMethodRow->description; ?></textarea>
             </div>
             <div class="col-4">
                 <label for="status">Status: </label>

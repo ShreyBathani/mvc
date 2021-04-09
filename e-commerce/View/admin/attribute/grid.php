@@ -1,5 +1,10 @@
 <?php $attributes = $this->getAttributes(); ?>
 
+<h4>
+Manage Attribue
+</h4>
+<hr>
+
 <a class="btn btn-success" onclick="object.setUrl('<?php echo $this->geturl('form', null, null, true); ?>').load();" href="javascript:void(0);">Add Attribute</a><br><br>
 <div id="table">
 	<table class="table table-hover">

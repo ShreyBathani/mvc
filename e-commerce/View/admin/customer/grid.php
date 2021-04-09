@@ -1,4 +1,10 @@
 <?php $customers = $this->getCustomers(); ?>
+
+<h4>
+Manage Customer
+</h4>
+<hr>
+
 <a class="btn btn-success" onclick="object.setUrl('<?php echo $this->geturl('form', null, null, true); ?>').load();" href="javascript:void(0);">Add Customer</a><br><br>
 <div id="table">
     <table class="table table-hover">
@@ -9,7 +15,7 @@
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
-            <th>Password</th>
+            <!-- <th>Password</th> -->
             <th>Phone</th>
             <th>Status</th>
             <th>zipcode</th>
@@ -30,7 +36,7 @@
                 <td><?php echo $value->firstName; ?></td>
                 <td><?php echo $value->lastName; ?></td>
                 <td><?php echo $value->email; ?></td>
-                <td><?php echo $value->password; ?></td>
+                <!-- <td><?php //echo $value->password; ?></td> -->
                 <td><?php echo $value->phone; ?></td>
                 <td><?php if($value->status == 0){echo "Disabled";} else {echo "Enabled"; } ?></td>
                 <td><?php echo $value->zipcode; ?></td>

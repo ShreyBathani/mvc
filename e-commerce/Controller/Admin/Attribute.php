@@ -4,7 +4,8 @@ namespace Controller\Admin;
 
 \Mage::loadFileByClassName('Controller\Core\Admin');
 
-class Attribute extends \Controller\Core\Admin{
+class Attribute extends \Controller\Core\Admin
+{
 
     public function gridAction(){
         try {
@@ -23,18 +24,18 @@ class Attribute extends \Controller\Core\Admin{
             $attribute = \Mage::getModel('Model\Attribute');
             $attribute->load($attributeId);
             if($attributeId){
-                if (!$attribute->getData()) {
+                if (!$attribute->getOriginalData()) {
                     throw new \Exception("No record found.");
                 }
             }
-            $editBlock = \Mage::getBlock('Block\Admin\Attribute\Edit')->setTableRow($attribute)->toHtml();
             //$tabBlock = \Mage::getBlock('Block\Admin\Attribute\Edit\Tabs')->toHtml();
-
-            $this->makeResponse($editBlock);
+            
         }
         catch (\Exception $e) {
             echo $e->getMessage();
         }
+        $editBlock = \Mage::getBlock('Block\Admin\Attribute\Edit')->setTableRow($attribute)->toHtml();
+        $this->makeResponse($editBlock);
     }
 
     public function saveAction()
@@ -48,12 +49,12 @@ class Attribute extends \Controller\Core\Admin{
             $attribute = \Mage::getModel('Model\Attribute');
             $attribute->load($attributeId);
             if($attributeId){
-                if (!$attribute->getData()) {
-                    throw new \Exception("No record found.");
-                }
+                throw new \Exception("No record found.");
             }
+            
 
             $attributeData = $this->getRequest()->getPost('attribute');
+            $attributeData['backendModel'] = addslashes($attributeData['backendModel']);
             $attribute->setData($attributeData);
             if(!$attribute->save()){
                 throw new \Exception("Error Processing Data.");
@@ -78,7 +79,7 @@ class Attribute extends \Controller\Core\Admin{
             
             $attribute = \Mage::getModel('Model\Attribute');
             $attribute->load($attributeId);
-            if (!$attribute->getData()) {
+            if (!$attribute->getOriginalData()) {
                 throw new \Exception("No record found.");
             }
             $query = "ALTER TABLE `{$attribute->entityTypeId}` DROP COLUMN `{$attribute->code}`;";

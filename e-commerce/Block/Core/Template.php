@@ -106,9 +106,9 @@ class Template
     }
 
     public function removeChild($key)
-    {
+    {   
         if (array_key_exists($key, $this->children)) {
-            unset($this->Children[$key]);
+            unset($this->children[$key]);
         }
         return $this;
     }
@@ -177,6 +177,20 @@ class Template
             unset($this->tabs[$key]);
         }
         return $this;
+    }
+
+    public function getBlock($className)
+    {
+        return \Mage::getBlock($className);
+    }
+
+    public function isLoggedIn()
+    {
+        $customerId = \Mage::getModel('Model\Customer\Session')->customerId;
+        if (!$customerId) {
+            return false;
+        }
+        return $customerId;
     }
 }
 

@@ -17,16 +17,9 @@ Class Option extends \Block\Core\Edit
             $this->$options = $options;
             return $this;
         }
-        if($attributeId = $this->getTableRow()->attributeId){
-            $attributeOption = \Mage::getModel('Model\Attribute\Option');
-            $query = "SELECT * FROM {$attributeOption->getTableName()} WHERE `attributeId` = {$attributeId};";
-            $options = $attributeOption->fetchAll($query);
-            if($options){
-                $this->options = $options;
-                return $this;
-            }
-        }
-        $this->options = $options;
+        $attributeId = $this->getTableRow()->attributeId;
+        $attribute = \Mage::getModel('Model\Attribute')->load($attributeId);
+        $this->options = $attribute->getOptions();
         return $this;
     }
 

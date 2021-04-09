@@ -15,7 +15,7 @@
 <form method="POST" id="form" action="<?php echo $this->getFormUrl(); ?>">
     <div class="ml-5">
         <div class="col-4 form-group">
-            <label for="userName">Username: </label>
+            <label for="password">Password: </label>
             <input type="text" name="admin[userName]" id="userName" class="form-control" value="<?php echo $adminRow->userName; ?>">
         </div>
 

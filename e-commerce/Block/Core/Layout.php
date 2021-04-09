@@ -13,7 +13,7 @@ namespace Block\Core;
 class Layout extends Template{
     
     public function __construct() {
-        $this->setTemplate('View/core/layout/oneColumn.php');
+        $this->setTemplate('View/core/oneColumn.php');
         $this->prepareChildren();
     }
 

@@ -1,23 +1,26 @@
-/* .edit-icon{
-    background-color: rgb(0, 185, 0);
-    color: white;
-    font-size: 18px;
-    padding: 5px 7px 5px 7px;
-    transition: 0.5s;
-    border-radius: 3px;
+/* ===========Login Register===========  */
+#loginBody{
+    background-color: #ff6666;
 }
-.del-icon{
-    background-color: rgb(219, 0, 0);
-    color: white;
-    font-size: 18px;
-    padding: 5px 9.25px 5px 9.25px;
-    margin-left: 10px;
-    transition: 0.5s;
-    border-radius: 3px;
+  
+#outerbox{
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30%;
+    background-color: white;
+    border-radius: 15px;
 }
-.edit-icon:hover,.del-icon:hover{
-    color: black;
+
+#login{
+    background-color: #ff6666;
 }
-.btn-success:hover{
-    color: black;
-} */
+
+#link{
+    color: #ff6666;
+    text-decoration: none;
+}

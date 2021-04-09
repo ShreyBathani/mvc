@@ -8,7 +8,7 @@ Class Tabs extends \Block\Core\Edit\Tabs{
     
     public function prepareTab()
     {
-        $this->addTab('customerGroup', ['label' => 'Group Infomation', 'block' => 'Block\Admin\Customer\Group\Edit\Tabs\Form']);
+        $this->addTab('customerGroup', ['label' => 'Group Information', 'block' => 'Block\Admin\Customer\Group\Edit\Tabs\Form']);
         $this->setDefaultTab('customerGroup');
         return $this;
     }

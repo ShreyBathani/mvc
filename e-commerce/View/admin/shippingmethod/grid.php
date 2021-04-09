@@ -1,4 +1,10 @@
 <?php $shippingMethods = $this->getShippingMethods(); ?>
+
+<h4>
+Manage Shipping Method
+</h4>
+<hr>
+
 <a class="btn btn-success" onclick="object.setUrl('<?php echo $this->geturl('form', null, null, true); ?>').load()" href="javascript:void(0)">Add Shipping Method</a><br><br>
 <div id="table">
   <table class="table table-hover">

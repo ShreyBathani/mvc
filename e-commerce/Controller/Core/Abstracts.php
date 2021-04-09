@@ -1,7 +1,7 @@
 <?php
 namespace Controller\Core;
 
-\Mage::loadFileByClassName('Block\Admin\Layout');
+\Mage::loadFileByClassName('Block\Core\Layout');
 
 Class Abstracts {
     protected $request = null;
@@ -25,10 +25,10 @@ Class Abstracts {
         return $this->request;
     }
 
-    public function setLayout(\Block\Admin\Layout $layout = null)
+    public function setLayout(\Block\Core\Layout $layout = null)
     {
         if (!$layout) {
-            $layout = new \Block\Admin\Layout();
+            $layout = new \Block\Core\Layout();
         }
         $this->layout = $layout;
         return $this;
@@ -115,6 +115,12 @@ Class Abstracts {
 
         header('Content-Type: application/json');
         echo json_encode($response);
+    }
+
+    function goback()
+    {
+        header("Location: {$_SERVER['HTTP_REFERER']}");
+        exit(0);
     }
 }
 

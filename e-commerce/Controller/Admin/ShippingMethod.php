@@ -23,17 +23,17 @@ class ShippingMethod extends \Controller\Core\Admin{
             $shippingMethod = \Mage::getModel('Model\ShippingMethod');
             $shippingMethod->load($methodId);
             if($methodId){
-                if (!$shippingMethod->getData()) {
+                if (!$shippingMethod->getOriginalData()) {
                     throw new \Exception("No record found.");
                 }
             }
 
-            $editBlock = \Mage::getBlock('Block\Admin\ShippingMethod\Edit')->setTableRow($shippingMethod)->toHtml();
-            $this->makeResponse($editBlock);
         } 
         catch (\Exception $e) {
             $this->getMessage()->setFailure($e->getMessage());
         }
+        $editBlock = \Mage::getBlock('Block\Admin\ShippingMethod\Edit')->setTableRow($shippingMethod)->toHtml();
+        $this->makeResponse($editBlock);
     }
 
     public function saveAction(){
@@ -48,7 +48,7 @@ class ShippingMethod extends \Controller\Core\Admin{
             $shippingMethod = \Mage::getModel('Model\ShippingMethod');
             $shippingMethod->load($methodId);
             if($methodId){
-                if (!$shippingMethod->getData()) {
+                if (!$shippingMethod->getOriginalData()) {
                     throw new \Exception("No record found.");
                 }
             }
@@ -81,7 +81,7 @@ class ShippingMethod extends \Controller\Core\Admin{
 
             $shippingMethod = \Mage::getModel('Model\ShippingMethod');
             $shippingMethod->load($methodId);
-            if(!$shippingMethod->getData()){
+            if(!$shippingMethod->getOriginalData()){
                 throw new \Exception("No record Found.");
             }
 

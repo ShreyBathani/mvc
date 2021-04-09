@@ -33,7 +33,7 @@ class Request {
     }
 
     public function getControllerName(){
-        return $this->getGet('c', 'Admin\index');
+        return $this->getGet('c', 'Home');
     }
 
     public function getFile($key = null, $optional = null){

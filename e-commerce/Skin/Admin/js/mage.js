@@ -98,7 +98,7 @@ Base.prototype = {
         
         var formData = new FormData();
         var file = $("#image")[0].files;
-        formData.append('productFile', file[0]);
+        formData.append('image', file[0]);
         this.setParams(formData);
         self = this;
         var request = $.ajax({

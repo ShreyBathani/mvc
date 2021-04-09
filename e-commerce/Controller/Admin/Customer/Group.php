@@ -23,17 +23,15 @@ class Group extends \Controller\Core\Admin{
             $customerGroup = \Mage::getModel('Model\Customer\Group');
             $customerGroup->load($groupId);
             if($groupId){
-                if (!$customerGroup->getData()) {
+                if (!$customerGroup->getOriginalData()) {
                     throw new \Exception("No record found.");
                 }
             }
-
-            $editBlock = \Mage::getBlock('Block\Admin\Customer\Group\Edit')->setTableRow($customerGroup)->toHtml();
-            
         }
         catch (\Exception $e) {
             $this->getMessage()->setFailure($e->getMessage());
         }
+        $editBlock = \Mage::getBlock('Block\Admin\Customer\Group\Edit')->setTableRow($customerGroup)->toHtml();
         $this->makeResponse($editBlock);
     }
 
@@ -49,7 +47,7 @@ class Group extends \Controller\Core\Admin{
             $customerGroup = \Mage::getModel('Model\Customer\Group');
             $customerGroup->load($groupId);
             if($groupId){
-                if (!$customerGroup->getData()) {
+                if (!$customerGroup->getOriginalData()) {
                     throw new \Exception("No record found.");
                 }
             }
@@ -82,7 +80,7 @@ class Group extends \Controller\Core\Admin{
 
             $customerGroup = \Mage::getModel('Model\Customer\Group');
             $customerGroup->load($groupId);
-            if (!$customerGroup->getData()) {
+            if (!$customerGroup->getOriginalData()) {
                 throw new \Exception("No record found.");
             }
             if(!$customerGroup->delete()){

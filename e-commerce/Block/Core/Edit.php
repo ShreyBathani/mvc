@@ -25,7 +25,6 @@ class Edit extends Template
         $tabBlock = \Mage::getBlock($tabBlock);
         $tabBlock->setTableRow($this->getTableRow());
         echo $tabBlock->toHtml();
-        
     }
 
     public function getTabHtml(){
@@ -44,7 +43,7 @@ class Edit extends Template
     public function setTab($tab = null)
     {
         if (!$tab) {
-            $tab = $this->getTabClass();
+            $tab = $this->getTabClass()->setTableRow($this->getTableRow());
         }
         $this->tab = $tab;
         return $this;        

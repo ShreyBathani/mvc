@@ -15,8 +15,7 @@ Class Grid extends \Block\Core\Grid{
 
     public function setCms($cms = null){
         if (!$cms) {
-            $admin = \Mage::getModel('Model\Cms');
-            $cms = $admin->fetchAll();
+            $cms = \Mage::getModel('Model\Cms')->fetchAll();
         }
         $this->cms = $cms;
         return $this;

@@ -8,6 +8,7 @@ class Admin extends \Controller\Core\Admin{
 
     public function gridAction(){
         try {
+    		$filterModel = \Mage::getModel('Model\Admin\Filter')->unsetFilters();
             $gridBlock = \Mage::getBlock('Block\Admin\Admin\Grid')->toHtml();
             $this->makeResponse($gridBlock);
 
@@ -20,6 +21,15 @@ class Admin extends \Controller\Core\Admin{
             echo $e->getMessage();
         }
     }
+
+    public function filterAction()
+	{
+		$filters = $this->getRequest()->getPost('filters');
+		$filterModel = \Mage::getModel('Model\Admin\Filter');
+		$filterModel->setFilters($filters);
+		$gridBlock = \Mage::getBlock('Block\Admin\Admin\Grid')->toHtml();
+        $this->makeResponse($gridBlock);
+	}
     
     public function formAction(){
         try{   
@@ -27,13 +37,13 @@ class Admin extends \Controller\Core\Admin{
 
             $admin = \Mage::getModel('Model\Admin');
             $admin->load($adminId);
+            
+            
             if($adminId){
-                if (!$admin->getData()) {
+                if (!$admin->getOriginalData()) {
                     throw new \Exception("No record found.");
                 }
             }
-
-            $editBlock = \Mage::getBlock('Block\Admin\Admin\Edit')->setTableRow($admin)->toHtml();
 
             
             /* $layout = $this->getLayout();
@@ -50,6 +60,7 @@ class Admin extends \Controller\Core\Admin{
         catch (\Exception $e) {
             $this->getMessage()->setFailure($e->getMessage());
         }
+        $editBlock = \Mage::getBlock('Block\Admin\Admin\Edit')->setTableRow($admin)->toHtml();
         $this->makeResponse($editBlock);
     }
 
@@ -65,7 +76,7 @@ class Admin extends \Controller\Core\Admin{
             $admin = \Mage::getModel('Model\Admin');
             $admin->load($adminId);
             if($adminId){
-                if (!$admin->getData()) {
+                if (!$admin->getOriginalData()) {
                     throw new \Exception("No record found.");
                 }
             }
@@ -85,8 +96,6 @@ class Admin extends \Controller\Core\Admin{
         
         $gridBlock = \Mage::getBlock('Block\Admin\Admin\Grid')->toHtml();
         $this->makeResponse($gridBlock);
-        
-        //$this->redirect('index', 'index', null, true);
     }
 
     public function deleteAction(){
@@ -98,7 +107,7 @@ class Admin extends \Controller\Core\Admin{
             
             $admin = \Mage::getModel('Model\Admin');
             $admin->load($adminId);
-            if (!$admin->getData()) {
+            if(!$admin->getOriginalData()){
                 throw new \Exception("No record found.");
             }
             if(!$admin->delete()){
@@ -112,8 +121,6 @@ class Admin extends \Controller\Core\Admin{
 
         $gridBlock = \Mage::getBlock('Block\Admin\Admin\Grid')->toHtml();
         $this->makeResponse($gridBlock);
-        
-        //$this->redirect('grid', null, null, true);
     }
 }
 

@@ -33,7 +33,7 @@
         </div>
         <div class="col-4 form-group">
             <label for="description">Description: </label>
-            <input type="text" name="category[description]" class="form-control" id="description" value="<?php echo $categoryRow->description; ?>">
+            <textarea name="category[description]" class="form-control" id="description" rows="4"><?php echo $categoryRow->description; ?></textarea>
         </div>
         <div class="col-4 form-group">
             <label for="parentId">Parent Path: </label>

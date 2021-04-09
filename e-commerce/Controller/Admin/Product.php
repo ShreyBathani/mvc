@@ -8,6 +8,7 @@ class Product extends \Controller\Core\Admin{
 
     public function gridAction(){
         try {
+    		$filterModel = \Mage::getModel('Model\Admin\Filter')->unsetFilters();
             $gridBlock = \Mage::getBlock('Block\Admin\Product\Grid')->toHtml();
             $this->makeResponse($gridBlock);
         }
@@ -15,6 +16,15 @@ class Product extends \Controller\Core\Admin{
             echo $e->getMessage();
         }
     }
+
+    public function filterAction()
+	{
+		$filters = $this->getRequest()->getPost('filters');
+		$filterModel = \Mage::getModel('Model\Admin\Filter');
+		$filterModel->setFilters($filters);
+		$gridBlock = \Mage::getBlock('Block\Admin\Product\Grid')->toHtml();
+        $this->makeResponse($gridBlock);
+	}
 
     public function formAction(){
         try {
@@ -24,7 +34,7 @@ class Product extends \Controller\Core\Admin{
             $product = \Mage::getModel('Model\Product');
             $product->load($productId);
             if ($productId) {
-                if(!$product->getData()){
+                if(!$product->getOriginalData()){
                     throw new \Exception("Reccord Not Found.");
                 }
             }
@@ -49,7 +59,7 @@ class Product extends \Controller\Core\Admin{
             $product = \Mage::getModel('Model\Product');
             $product->load($productId);
             if ($productId) {
-                if(!$product->getData()){
+                if(!$product->getOriginalData()){
                     throw new \Exception("Reccord Not Found.");
                 }
                 $product->updatedDate = date("Y-m-d H:i:s");
@@ -59,11 +69,42 @@ class Product extends \Controller\Core\Admin{
             }
 
             $productData = $this->getRequest()->getPost('product');
-            $product->setData($productData);
 
+            $categoryOptions = null;
+            if (array_key_exists('category', $productData)) {
+                $categoryOptions = $productData['category'];
+                unset($productData['category']);
+            }
+            
+            $product->setData($productData);
+            
             if(!$product->save()){
                 throw new \Exception("Error Processing Data.");
             }
+            
+            if ($categoryOptions) {
+                $productId = $product->productId;
+                $ids = '';
+                foreach ($categoryOptions as $categoryId) {
+                    $productCategory = \Mage::getModel('Model\Product\Category');
+                    $query = "SELECT * FROM {$productCategory->getTableName()}
+                    WHERE `productId` = '{$productId}' 
+                    AND `categoryId` = '{$categoryId}';";
+                    $exists = $productCategory->fetchRow($query);
+                    $ids .= $categoryId.',';
+                    if ($exists) {
+                        continue;
+                    }
+                    $productCategory->productId = $productId;
+                    $productCategory->categoryId = $categoryId;
+                    $productCategory->save();
+                }
+                $ids = '('. rtrim($ids, ',').')';
+                $productCategory = \Mage::getModel('Model\Product\Category');
+                $query = "DELETE FROM `{$productCategory->getTableName()}` WHERE `productId` = '{$productId}' AND `categoryId` NOT IN {$ids};";
+                $productCategory->getAdapter()->update($query);
+            }
+
             $this->getMessage()->setSuccess('Data Stored Successfully !!');
         }
         catch (\Exception $e) {
@@ -83,7 +124,7 @@ class Product extends \Controller\Core\Admin{
 
             $product = \Mage::getModel('Model\Product');
             $product->load($productId);
-            if(!$product->getData()){
+            if(!$product->getOriginalData()){
                 throw new \Exception("No record Found.");
             }
 

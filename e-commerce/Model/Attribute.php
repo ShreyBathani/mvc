@@ -55,17 +55,25 @@ class Attribute extends Core\Table
         ];
     }
 
-    public function getOptions()
-    {   print_r($this);
+    /* public function getOptions()
+    {   
         if (!$this->attributeId) {
             return false;
         }
-
         $optionModel = \Mage::getModel('Model\Attribute\Option');
-        echo $query = "SELECT * FROM {$optionModel->getTableName()} 
-        WHERE `{$this->getPrimaryKey()}` = {$this->attributeIdd}
-        ORDER BY `sortOrder` ACS;";
+        $query = "SELECT * FROM {$optionModel->getTableName()} 
+        WHERE `{$this->getPrimaryKey()}` = {$this->attributeId}
+        ORDER BY `sortOrder`;";
         return $optionModel->fetchAll($query);
+    } */
+
+    public function getOptions()
+    {
+        if (!$this->attributeId) {
+            return false;
+        }
+        $optionModel = \Mage::getModel($this->backendModel);
+        return $optionModel->setAttribute($this)->getOptions();
     }
 }
 

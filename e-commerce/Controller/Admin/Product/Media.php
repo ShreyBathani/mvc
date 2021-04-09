@@ -13,7 +13,7 @@ class Media extends \Controller\Core\Admin{
             $product = \Mage::getModel('Model\Product');
             $product->load($productId);
             if ($productId) {
-                if(!$product->getData()){
+                if(!$product->getOriginalData()){
                     throw new \Exception("Record Not Found.");
                 }
             }
@@ -39,7 +39,7 @@ class Media extends \Controller\Core\Admin{
             $product = \Mage::getModel('Model\Product');
             $product->load($productId);
             if ($productId) {
-                if(!$product->getData()){
+                if(!$product->getOriginalData()){
                     throw new \Exception("Record Not Found.");
                 }
             }
@@ -48,6 +48,7 @@ class Media extends \Controller\Core\Admin{
             $media = \Mage::getModel('Model\Product\Media');
 
             foreach ($mediaData['label'] as $key1 => $value1) {
+                $media->load($key1);
                 $media->label = $value1;
                 foreach ($mediaData as $key2 => $value2) {
                     if($key2 == 'label' || $key2 == 'remove'){
@@ -55,7 +56,7 @@ class Media extends \Controller\Core\Admin{
                     }
                     $media->$key2 = (in_array($key1, $value2)) ? 1 : '';
                 }
-                $media->imageId = $key1;
+                //$media->imageId = $key1;
                 if(!$media->save()){
                     throw new \Exception("Error Processing Data.");
                 }
@@ -81,12 +82,15 @@ class Media extends \Controller\Core\Admin{
             
             $product = \Mage::getModel('Model\Product');
             $product->load($productId);
-            if(!$product->getData()){
+            if(!$product->getOriginalData()){
                 throw new \Exception("Product Not Found.");
             }
             
             $media = \Mage::getModel('Model\Product\Media');
-            $image = $this->getRequest()->getFile('productFile');
+            $image = $this->getRequest()->getFile('image');
+            if (!$image) {
+                throw new \Exception("Please select image.");
+            }
             $imageName = $media->getImagePath().$image["name"];
             
             if (file_exists($imageName)) {
@@ -130,7 +134,7 @@ class Media extends \Controller\Core\Admin{
 
             $product = \Mage::getModel('Model\Product');
             $product->load($productId);
-            if(!$product->getData()){
+            if(!$product->getOriginalData()){
                 throw new \Exception("Record Not Found.");
             }
 

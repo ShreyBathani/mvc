@@ -10,7 +10,7 @@
 
         
 <form method="POST" action="<?php echo "{$this->geturl('saveMedia', 'Admin\Product\Media', null)}"; ?>" enctype="multipart/form-data">
-    <input class="btn btn-success mb-3 float-right" type="button" onclick="object.setForm(this).setUrl('<?php echo $this->geturl('deleteMedia', 'Product\Media', null); ?>').load()"  value="Delete">
+    <input class="btn btn-success mb-3 float-right" type="button" onclick="object.setForm(this).setUrl('<?php echo $this->geturl('deleteMedia', 'Admin\Product\Media', null); ?>').load()"  value="Delete">
     <input class="btn btn-success mb-3 mr-3 float-right" onclick="object.setForm(this).load()" type="button" value="Update">
     <table class="table table-hover">
         <thead class="thead-light">
@@ -60,11 +60,8 @@
                 <input type="file" id="image" name="image" class="form-control">
             </div>
         </div>
-            <div class="col-4">
-                <input type="button" class="btn btn-success" onclick="object.setForm(this).setUrl('<?php echo $this->geturl('uploadImage', 'Product\Media', null); ?>').uploadFile()" value="Upload">
-            </div>
-        <div class="row form-group">
-            
+        <div class="col-4">
+            <input type="button" class="btn btn-success" onclick="object.setForm(this).setUrl('<?php echo $this->geturl('uploadImage', 'Admin\Product\Media', null); ?>').uploadFile()" value="Upload">
         </div>
     </div>
 </form>

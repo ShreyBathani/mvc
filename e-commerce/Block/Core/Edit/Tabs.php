@@ -13,13 +13,13 @@ class Tabs extends \Block\Core\Template
         $this->prepareTab();
     }
     public function setTableRow(\Model\Core\Table $tableRow)
-    {
-        $this->tablRow = $tableRow;
+    {   
+        $this->tableRow = $tableRow;
         return $this;
     }
 
     public function getTableRow()
-    {
+    {   
         return $this->tableRow;
     }
 

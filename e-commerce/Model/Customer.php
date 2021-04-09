@@ -20,6 +20,26 @@ class Customer extends Core\Table{
             self::STATUS_ENABLED => 'Enabled'
         ];
     }
+
+    public function getBillingAddress()
+    {
+        $customerAddress = \Mage::getModel('Model\Customer\Address');
+        $query = "SELECT * FROM {$customerAddress->getTableName()} WHERE `customerId` = '{$this->customerId}' AND `addressType` = 'Billing';";
+        if(!$customerAddress->fetchRow($query)){
+            return false;
+        }
+        return $customerAddress;
+    }
+
+    public function getShippingAddress()
+    {
+        $customerAddress = \Mage::getModel('Model\Customer\Address');
+        $query = "SELECT * FROM {$customerAddress->getTableName()} WHERE `customerId` = '{$this->customerId}' AND `addressType` = 'Shipping';";
+        if(!$customerAddress->fetchRow($query)){
+            return false;
+        }
+        return $customerAddress;
+    }
 }
 
 ?>

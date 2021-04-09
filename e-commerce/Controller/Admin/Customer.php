@@ -28,18 +28,17 @@ class Customer extends \Controller\Core\Admin{
             $customer = \Mage::getModel('Model\Customer');
             $customer->load($customerId);
             if ($customerId) {
-                if(!$customer->getData()){
+                if(!$customer->getOriginalData()){
                     throw new \Exception("No record found.");
                 }
             }
-            $editBlock = \Mage::getBlock('Block\Admin\Customer\Edit')->setTableRow($customer)->toHtml();
-
+            
             /* $layout = $this->getLayout();
             $layout->setTemplate('View/admin/core/layout/twoColumn.php');
             
             $content = $layout->getContent();
             $content->addChild($editBlock);
-
+            
             $left = $layout->getLeft();
             $left->addChild($tabBlock);
             
@@ -48,6 +47,7 @@ class Customer extends \Controller\Core\Admin{
         catch (\Exception $e) {
             $this->getMessage()->setFailure($e->getMessage());
         }
+        $editBlock = \Mage::getBlock('Block\Admin\Customer\Edit')->setTableRow($customer)->toHtml();
         $this->makeResponse($editBlock);
     }
     
@@ -62,7 +62,7 @@ class Customer extends \Controller\Core\Admin{
             $customer = \Mage::getModel('Model\Customer');
             $customer->load($customerId);
             if ($customerId) {
-                if(!$customer->getData()){
+                if(!$customer->getOriginalData()){
                     throw new \Exception("No record found.");
                 }
                 $customer->updatedDate = date("Y-m-d H:i:s");
@@ -90,7 +90,7 @@ class Customer extends \Controller\Core\Admin{
                     $this->getMessage()->setSuccess('Address Stored Successfully !!');
                 }
                 
-                $address->unsetData();
+                $address->unsetOriginalData();
                 $address = $addressBlock->getShipping();
 
                 $shippingData = $this->getRequest()->getPost('shipping');
@@ -132,7 +132,7 @@ class Customer extends \Controller\Core\Admin{
 
             $customer = \Mage::getModel('Model\Customer');
             $customer->load($customerId);
-            if(!$customer->getData()){
+            if(!$customer->getOriginalData()){
                 throw new \Exception("No record Found.");
             }
             if(!$customer->delete()){

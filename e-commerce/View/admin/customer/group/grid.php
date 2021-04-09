@@ -1,4 +1,10 @@
 <?php $customerGroups = $this->getCustomerGroups(); ?>
+
+<h4>
+Manage customer Group
+</h4>
+<hr>
+
 <a class="btn btn-success" onclick="object.setUrl('<?php echo $this->geturl('form', null, true, true); ?>').load()" href="javascript:void(0)" title="Delete Group" class="btn btn-danger">Add Customer Group</a><br><br>
 <div id="table">
   <table class="table table-hover">
